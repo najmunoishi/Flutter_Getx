@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:getx/controller/controller.dart';
+
+import '../controller/controller.dart';
 
 class IncrementScreen extends StatelessWidget {
   final _controller = Get.put(IncrementController());
@@ -14,7 +15,14 @@ class IncrementScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //$ string interpulation.
-            Obx(() => Text("The Value is ${_controller.value}")),
+            GetBuilder<IncrementController>(
+              init: IncrementController(),
+              builder: (controller) {
+                return Text(
+                  "The Value is ${controller.value}",
+                );
+              },
+            ),
             GestureDetector(
                 child: Text(
                   "count",
